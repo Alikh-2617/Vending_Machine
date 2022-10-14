@@ -8,9 +8,9 @@ namespace Vending_Machine
 {
     public class Chips : IProducts
     {
-        public void Description()
+        public object Description()
         {
-            Console.WriteLine("Öppna paketet och ät den bara fan !");
+            return "Öppna paketet och ät den bara fan !";
         }
 
         public string Name()

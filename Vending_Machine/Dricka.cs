@@ -9,9 +9,9 @@ namespace Vending_Machine
 {
     public class Dricka : IProducts
     {
-        public void Description()
+        public object Description()
         {
-            Console.WriteLine("Dick upp den om du är inte klock !");
+            return "Dick upp den om du är inte klock !";
         }
 
         public string Name()

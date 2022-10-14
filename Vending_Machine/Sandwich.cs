@@ -8,9 +8,9 @@ namespace Vending_Machine
 {
     public class Sandwich : IProducts
     {
-        public void Description()
+        public object Description()
         {
-            Console.WriteLine("bara ät den , så enkelt !");
+            return "bara ät den , så enkelt !";
 
         }
 

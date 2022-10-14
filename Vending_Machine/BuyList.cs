@@ -32,12 +32,12 @@ namespace Vending_Machine
 
         public void Show_Buyed_list(List<IProducts> list)
         {
-            Console.Write("[");
+ 
             foreach (var item in list)
             {
-                Console.Write("("+item.Name() + ": " + item.Price()+") ,");
+                Console.WriteLine("[("+item.Name() + ": " + item.Price()+ " Kr) ==> Description : " + item.Description() + " ]");
             }
-            Console.WriteLine("]\n\t\t\t\t\t\t\t Totalt price : " + Totalt_price(list));
+            Console.WriteLine("\n\t\t\t\t\t\t\t Totalt price : " + Totalt_price(list));
         }
 
 
@@ -51,7 +51,7 @@ namespace Vending_Machine
             Console.WriteLine(" 2- " + chips.Name() + "  : " + chips.Price() + " kr");
             Console.WriteLine(" 3- " + dricka.Name() + " : " + dricka.Price() + " kr");
             Console.WriteLine(" 4- Sätta mer pengar . ");
-            Console.WriteLine(" 5- Avsluta programmet och få tillbaka pengarna.\n" +
+            Console.WriteLine(" 5- Avsluta köpet.\n" +
                               "---------------------------------------------------");
             Console.WriteLine("\n\nDin köp val : ");
         }
@@ -84,14 +84,13 @@ namespace Vending_Machine
                         run = moneyManager.CheckMoney(Totalt_price(list), ref money);
                         break;
                     case 4:
-
-                        // check current money gonna show !! 
-
                         moneyManager.SetMorMoney(ref money , Totalt_price(list));
                         break;
 
                     case 5:
                         Console.Clear();
+                        moneyManager.CurrentMoney(ref money, Totalt_price(list));
+                        Show_Buyed_list(list);
                         moneyManager.ReturnLeftMoney(ref money);
                         Console.WriteLine("Tack för besök. tryck inter för att avsluta prgrammet ");
                         list.Clear();

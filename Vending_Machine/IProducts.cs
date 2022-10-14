@@ -10,7 +10,7 @@ namespace Vending_Machine
     {
         int Price();
         string Name();
-        void Description();
+        object Description();
 
     }
 }

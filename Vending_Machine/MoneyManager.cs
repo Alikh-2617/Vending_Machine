@@ -33,6 +33,12 @@ namespace Vending_Machine
             money += Get_Int();
         }
 
+
+        public void CurrentMoney(ref int money , int price )
+        {
+             money= money - price;
+        }
+
         public bool CheckMoney( int totalPrice , ref int money )
         {
             bool check = true;
