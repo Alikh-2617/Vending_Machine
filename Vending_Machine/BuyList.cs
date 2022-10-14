@@ -33,7 +33,7 @@ namespace Vending_Machine
             {
                 Console.WriteLine("[("+item.Name() + ": " + item.Price()+ " Kr) ==> Description : " + item.Description() + " ]");
             }
-            Console.WriteLine("\n\t\t\t\t\t\t\t Totalt price : " + Totalt_price(list));
+            Console.WriteLine("\n\n\t\t\t\t\t\t\t Totalt price : " + Totalt_price(list) + " Kr");
         }
 
         public void Menu()
@@ -47,7 +47,7 @@ namespace Vending_Machine
             Console.WriteLine(" 4- Sätta mer pengar . ");
             Console.WriteLine(" 5- Avsluta köpet.\n" +
                               "---------------------------------------------------");
-            Console.WriteLine("\n\nDin köp val : ");
+            Console.WriteLine("\n\nDina köp val : ");
         }
 
         public void Show_list()

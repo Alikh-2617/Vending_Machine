@@ -1,4 +1,7 @@
-﻿namespace Vending_Machine
+﻿
+
+
+namespace Vending_Machine
 {
     public class Program
     {
