@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vending_Machine
 {
-    internal class Sandwich : IProducts
+    public class Sandwich : IProducts
     {
         public void Description()
         {

@@ -8,58 +8,19 @@ namespace Vending_Machine
 {
     public class BuyList
     {
-        private List<IProducts> list = new List<IProducts>();
-
+        MoneyManager moneyManager = new MoneyManager();
         IProducts sandwich = new Sandwich();
-        IProducts chips = new Chips();  
+        IProducts chips = new Chips();
         IProducts dricka = new Dricka();
 
-        public void Show_list()
-        {
-            Console.WriteLine("Hej, här är lista över varor med pricet :");
-            Console.WriteLine(" 1- "+sandwich.Name() +"  : "+ sandwich.Price()+" kr");
-            Console.WriteLine(" 2- " + chips.Name() + "  : " + chips.Price() + " kr");
-            Console.WriteLine(" 3- " + dricka.Name() + " : " + dricka.Price() + " kr");
-            Console.WriteLine(" 4- Avsluta programmet och få tillbaka pengarna.");
-            Console.Write("\n\nVilken vill du köpa : ");
-            //int i = Get_Int();
-            //switch (i)
-            //{
-            //    case 1:
-            //        list.Add(sandwich);
-            //        break;
-            //    case 2:
-            //        list.Add(chips);
-            //        break;
-            //    case 3:
-            //        list.Add(dricka);
-            //        break;
-            //    case 4:
-            //        break;
-            //    default:
-            //        Console.WriteLine("hände något fel , försökt igen !");
-            //        break;
-            //}
-        }
-
-        public void Buying(IProducts product)
-        {
-            list.Add(product);
-        }
-
-        public void Show_Buyed_list()
-        {
-            foreach (var item in list)
-            {
-                Console.Write(item.Name() +"\t : "+ item.Price());
-            }
-        }
+        List<IProducts> list = new List<IProducts>();
+        
 
 
-        public int Totalt_price()
+        public int Totalt_price(List<IProducts> list)
         {
             int totalt_price = 0;
-             foreach (var item in list)
+            foreach (var item in list)
             {
                 totalt_price += item.Price();
             }
@@ -67,26 +28,95 @@ namespace Vending_Machine
             return totalt_price;
         }
 
-        public int Get_Int()
+
+
+        public void Show_Buyed_list(List<IProducts> list)
         {
-            int svar = 0;
-            bool run = true;
-            while (true)
+            Console.Write("[");
+            foreach (var item in list)
             {
-                Console.Write(" ==> : ");
-                try
+                Console.Write("("+item.Name() + ": " + item.Price()+") ,");
+            }
+            Console.WriteLine("]\n\t\t\t\t\t\t\t Totalt price : " + Totalt_price(list));
+        }
+
+
+
+        public void Menu()
+        {
+            Console.Clear();
+            Console.WriteLine("Hej, här är lista över varor med pricet :\n" +
+                              "---------------------------------------------\n");
+            Console.WriteLine(" 1- " + sandwich.Name() + "  : " + sandwich.Price() + " kr");
+            Console.WriteLine(" 2- " + chips.Name() + "  : " + chips.Price() + " kr");
+            Console.WriteLine(" 3- " + dricka.Name() + " : " + dricka.Price() + " kr");
+            Console.WriteLine(" 4- Sätta mer pengar . ");
+            Console.WriteLine(" 5- Avsluta programmet och få tillbaka pengarna.\n" +
+                              "---------------------------------------------------");
+            Console.WriteLine("\n\nDin köp val : ");
+        }
+
+        public void Show_list()
+        {
+            int money = 0;
+            bool run = true;
+            moneyManager.SetMoney(ref money);
+
+            while (run)
+            {
+                Menu();
+                Show_Buyed_list(list);
+                moneyManager.GetMoney(ref money);
+                int i = moneyManager.Get_Int();
+                                
+                switch (i)
                 {
-                    svar = Convert.ToInt32(Console.ReadLine());
-                    run = false;
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"fel typ av input !\nMeddelandet ( {e.Message} )");
+                    case 1:
+                        list.Add(sandwich);
+                        run = moneyManager.CheckMoney(Totalt_price(list) , ref money);
+                        break;
+                    case 2:
+                        list.Add(chips);
+                        run = moneyManager.CheckMoney(Totalt_price(list), ref money);
+                        break ;
+                    case 3:
+                        list.Add(dricka);
+                        run = moneyManager.CheckMoney(Totalt_price(list), ref money);
+                        break;
+                    case 4:
+
+                        // check current money gonna show !! 
+
+                        moneyManager.SetMorMoney(ref money , Totalt_price(list));
+                        break;
+
+                    case 5:
+                        Console.Clear();
+                        moneyManager.ReturnLeftMoney(ref money);
+                        Console.WriteLine("Tack för besök. tryck inter för att avsluta prgrammet ");
+                        list.Clear();
+                        Console.ReadKey();
+                        run = false;
+                        continue;
+
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Fel val !\n\nTryck inter för att komma till Menu igen !");
+                        Console.ReadKey();
+                        continue;
+
                 }
             }
-            return svar;
+
         }
+
+
+
+
+
+
+
+
 
 
     }
