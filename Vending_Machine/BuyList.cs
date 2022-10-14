@@ -15,8 +15,6 @@ namespace Vending_Machine
 
         List<IProducts> list = new List<IProducts>();
         
-
-
         public int Totalt_price(List<IProducts> list)
         {
             int totalt_price = 0;
@@ -28,8 +26,6 @@ namespace Vending_Machine
             return totalt_price;
         }
 
-
-
         public void Show_Buyed_list(List<IProducts> list)
         {
  
@@ -39,8 +35,6 @@ namespace Vending_Machine
             }
             Console.WriteLine("\n\t\t\t\t\t\t\t Totalt price : " + Totalt_price(list));
         }
-
-
 
         public void Menu()
         {

@@ -8,7 +8,6 @@ namespace Vending_Machine
 {
     public class MoneyManager : Money
     {
-
         public override void GetMoney(ref int money)
         {
             Console.WriteLine($"\t\t\t\t\t\t\t Din Saldo är : {money} Kr");
@@ -33,8 +32,7 @@ namespace Vending_Machine
             money += Get_Int();
         }
 
-
-        public void CurrentMoney(ref int money , int price )
+        public override void CurrentMoney(ref int money , int price )
         {
              money= money - price;
         }
@@ -65,7 +63,6 @@ namespace Vending_Machine
 
             return check;
         }
-
 
         public void ReturnLeftMoney(ref int money)
         {

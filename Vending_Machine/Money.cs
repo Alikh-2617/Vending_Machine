@@ -14,6 +14,7 @@ namespace Vending_Machine
         public abstract void GetMoney(ref int money);
         public abstract void SetMoney(ref int money);
         public abstract void SetMorMoney(ref int money , int totalprice);
+        public abstract void CurrentMoney(ref int money, int price);
         public virtual int Get_Int()
         {
             int i = 0;
