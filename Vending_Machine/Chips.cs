@@ -6,22 +6,16 @@ using System.Threading.Tasks;
 
 namespace Vending_Machine
 {
-    public class Chips : IProducts
+    public class Chips : Product
     {
-        public object Description()
+        public Chips(int price, string name, string description) : base(price, name, description)
         {
-            return "Öppna paketet och ät den bara fan !";
-        }
 
-        public string Name()
-        {
-            string name = "Chips för chubby. ";
-            return name ;
-        }
 
-        public int Price()
+        }
+        public override void Use()
         {
-            return 15;
+            Console.WriteLine($"Du äter den {Name}. Knaprigt och gött!");
         }
     }
 }

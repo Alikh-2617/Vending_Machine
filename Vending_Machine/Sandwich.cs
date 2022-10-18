@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Vending_Machine
 {
-    public class Sandwich : IProducts
+    public class Sandwich : Product
     {
-        public object Description()
+        public Sandwich(int price, string name, string description) : base(price, name, description)
         {
-            return "bara ät den , så enkelt !";
+
 
         }
 
-        public string Name()
+        public override void Use()
         {
-            string name = "Smörgås";
-            return name;
+            Console.WriteLine($"Du äter {Name}");
         }
 
-        public int Price()
-        {
-            return 25;
-        }
     }
 }

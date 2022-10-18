@@ -7,22 +7,16 @@ using System.Threading.Tasks;
 
 namespace Vending_Machine
 {
-    public class Dricka : IProducts
+    public class Dricka : Product
     {
-        public object Description()
+        public Dricka(int price, string name, string description) : base(price, name, description)
         {
-            return "Dick upp den om du är inte klock !";
-        }
 
-        public string Name()
-        {
-            string name = "Dicka för törstiga";
-            return name ;
-        }
 
-        public int Price()
+        }
+        public override void Use()
         {
-            return 10;
+            Console.WriteLine($"du dricker den {Name}");
         }
     }
 }
