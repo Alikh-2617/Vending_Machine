@@ -33,6 +33,18 @@ namespace TestProject1
 
         }
         VendingMachine vendingMachine = new VendingMachine();
+        public List<Product> ByedList = new List<Product>();
+
+        //[Fact]
+        //public void vendingMachineTest()
+        //{
+        //    vendingMachine.Money = 0;
+        //    vendingMachine.Products.Add(Dricka);
+
+        //    Assert.Equal();
+        //}
+
+
 
         [Fact]
         public void TotalpriceTest()
@@ -52,6 +64,6 @@ namespace TestProject1
             Assert.Equal(1, Products.Count());
 
         }
-
+       
     }
 }
