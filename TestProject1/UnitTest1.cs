@@ -62,6 +62,7 @@ namespace TestProject1
             vendingMachine.ByedList.Add(Chips);
 
             Assert.True(vendingMachine.CheckMoney());
+            // Assert.False(vendingMachine.CheckMoney());
         }
 
 
