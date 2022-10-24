@@ -148,25 +148,29 @@ namespace Vending_Machine
         public bool CheckMoney()
         {
             bool check = true;
-            int totalPrice = Totalprice();
-            Console.Clear();
+            int totalPrice = 0;
+            foreach (Product product in ByedList)
+            {
+                totalPrice += product.Price;
+            }
+
             if (totalPrice > Money)
             {
-                Console.WriteLine("Du har inte tillräckligt pengar vill du sätta pengar ? 1 ja // 2 nej avsluta.");
-                int i = Get_Int();
-                if (i == 1)
-                {
-                    SetMorMoney();
-                }
-                else
-                {
-                    Console.WriteLine("tryck Enter föratt få dina pengarna till baka.");
-                    Console.ReadKey();
-                    EndTransaction();
-                    Console.WriteLine("tryck Enter föratt avsluta.");
-                    Console.ReadKey();
-                    check = false;
-                }
+                //Console.WriteLine("Du har inte tillräckligt pengar vill du sätta pengar ? 1 ja // 2 nej avsluta.");
+                //int i = Get_Int();
+                //if (i == 1)
+                //{
+                //    SetMorMoney();
+                //}
+                //else
+                //{
+                //    Console.WriteLine("tryck Enter föratt få dina pengarna till baka.");
+                //    Console.ReadKey();
+                //    EndTransaction();
+                //    Console.WriteLine("tryck Enter föratt avsluta.");
+                //    Console.ReadKey();
+                //}
+                check = false;
 
             }
             return check;

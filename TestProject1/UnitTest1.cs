@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using Vending_Machine;
 
 namespace TestProject1
@@ -32,38 +33,39 @@ namespace TestProject1
             Assert.Equal("dd", Chips.Description);
 
         }
+
         VendingMachine vendingMachine = new VendingMachine();
-        public List<Product> ByedList = new List<Product>();
 
-        //[Fact]
-        //public void vendingMachineTest()
-        //{
-        //    vendingMachine.Money = 0;
-        //    vendingMachine.Products.Add(Dricka);
-
-        //    Assert.Equal();
-        //}
-
-
+        [Fact]
+        public void CheckForItemsTest()
+        {
+            Assert.True(vendingMachine.Products.Any());
+            Assert.Equal(3, vendingMachine.Products.Count());
+        }
 
         [Fact]
         public void TotalpriceTest()
         {
-            vendingMachine.Money = 15;
-            Assert.Equal(0, vendingMachine.Totalprice());
-        }
+            vendingMachine.ByedList.Add(Chips);
+            vendingMachine.ByedList.Add(Chips);
 
+            Assert.True(vendingMachine.ByedList.Any());
+            Assert.Equal(2, vendingMachine.ByedList.Count());
+            Assert.Equal(40, vendingMachine.Totalprice());
+
+        }
         [Fact]
         public void CheckMoneyTest()
         {
-            List<Product> Products = new List<Product>();
-            Products.Add(new Dricka(15, "ii", "ww"));
-            vendingMachine.Money = 20;
+            vendingMachine.Money = 100;
+            vendingMachine.ByedList.Add(Chips);
+            vendingMachine.ByedList.Add(Chips);
 
-            Assert.True(Products.Any());
-            Assert.Equal(1, Products.Count());
-
+            Assert.True(vendingMachine.CheckMoney());
         }
-       
+
+
+
+
     }
 }
