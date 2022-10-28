@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace Vending_Machine
 {
     public class Program
@@ -25,7 +23,7 @@ namespace Vending_Machine
                         machine.InsertMoney(machine.Get_Int());
                         break;
                     case 2:
-                        machine.EndTransaction();
+                        machine.ReturnLeftMoney(machine.EndTransaction());
                         run = false;
                         break;
                     case 3:

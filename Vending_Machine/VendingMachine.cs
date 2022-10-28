@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,170 +15,16 @@ namespace Vending_Machine
 
         public List<Product> Products = new List<Product>();
         public List<Product> ByedList = new List<Product>();
-        Dictionary<int, int> returnManey = new Dictionary<int, int>();
+
+
         readonly int[] list = new int[] { 1, 5, 10, 20, 50, 100, 200, 500, 1000 };
         string[] myList = new string[] { "", "", "0", "00", "000", "0000" };
         public int Money = 0;
 
-        public void EndTransaction()
+        public Dictionary<int ,int > EndTransaction()
         {
-            Console.Clear();    
-            //int b = 0;
-            //for (int i = list.Length-1 ; i <= 0 ; i--)
-            //{
-            //    while(list[i] <= Money)
-            //    {
-            //        returnManey.Add(b, list[i]);
-            //        b++;
-            //    }
-            //}
-            //Console.WriteLine("Return Money [ ");
-
-            //foreach (KeyValuePair<int, int> item in returnManey)
-            //{
-            //    Console.Write(" =>" + item.Value.ToString() + "kr,  ");
-            //}
-            //Console.WriteLine(" ]"); 
-
-            // OR 
-            Console.WriteLine("dina köp : ");
-            ShowBuyedList();
-            int i = Money - Totalprice();
-            ReturnLeftMoney(i); 
-            ByedList.Clear();
-            returnManey.Clear();
-        }
-
-        public void InsertMoney(int money1)
-        {
-            Money += money1;
-        }
-
-        public void Purchase(int choice, bool haveMoney )
-        {
-            int b = choice - 4;
-            if (haveMoney == true)
-            {
-                for (int i = 0; i < Products.Count; i++)
-                {
-                    if (i ==b )
-                    {
-                        ByedList.Add(Products[i]);
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("du har inte tillräckligt sakdo.");
-            }
-        }
-
-        public void ShowAll()
-        {
-            Console.Write($"\n1- För sätta mer Pengar.\n2- för att avsluta och få köpet.\n3- för att avbryta köpet. \n");
-            for (int i = 0; i < Products.Count; i++)
-            {
-                Console.WriteLine(i+4+"- " + Products[i].Name + "    Price: " + Products[i].Price + "Kr , Description: " + Products[i].Description);
-            }
-        }
-
-        public void CreateProducts()
-        {
-
-            Dricka dricka = new Dricka(15 , "Fanta" , "Drick upp den !");
-            Chips chips = new Chips(23 , "Chips" , "Öppna paketet och ät bara!");
-            Sandwich sandwich = new Sandwich(25,"Chicken" , "ät den i lung o ro MED SÅS !");
-            Products.Add(sandwich);
-            Products.Add(chips);
-            Products.Add(dricka);
-        }
-
-
-        //---------------------------------------------------------------------------
-        public void ShowBuyedList()
-        {
-            Console.WriteLine("Din köpte lista : ");
-            for (int i = 0; i < ByedList.Count; i++)
-            {
-                Console.WriteLine("[ " +i + 1 + "- " + ByedList[i].Name + "    Price: " + ByedList[i].Price + "Kr , Description: " + ByedList[i].Description+" ]");
-            }
-        }
-
-        public void Cancel()
-        {
-            ReturnLeftMoney(Money);
-        }
-
-        public void GetMoney()
-        {
-            Console.WriteLine($"\t\t\t\t\t\t\t Din Saldo är : {Money} Kr");
-            Console.WriteLine($"\t\t\t\t\t\t\t Köpt Saldo är : {Totalprice()} Kr");
-        }
-
-        public void SetMoney()
-        {
-            Console.WriteLine("Hej här kan du sätta pengar : ");
-            Money = Get_Int();
-        }
-
-        public int Totalprice()
-        {
-            int c = 0;
-            foreach (Product product in ByedList)
-            {
-                c += product.Price;
-            }
-            return c;
-        }
-
-        public void SetMorMoney()
-        {
-            int c = Totalprice();
-            Console.WriteLine("Hej, här kan du sätta pengar i din saldo : ");
-            Console.Write("\n------------------------\n" +
-                              "\nDin saldo           : " + Money +
-                              "\nTotalt inköpt belopp: " + c +
-                              "\nTillgängligt saldo  : " + (Money - c) +
-
-                              "\n\nTilllägg pengar");
-            Money += Get_Int();
-        }
-
-        public bool CheckMoney()
-        {
-            bool check = true;
-            int totalPrice = 0;
-            foreach (Product product in ByedList)
-            {
-                totalPrice += product.Price;
-            }
-
-            if (totalPrice > Money)
-            {
-                //Console.WriteLine("Du har inte tillräckligt pengar vill du sätta pengar ? 1 ja // 2 nej avsluta.");
-                //int i = Get_Int();
-                //if (i == 1)
-                //{
-                //    SetMorMoney();
-                //}
-                //else
-                //{
-                //    Console.WriteLine("tryck Enter föratt få dina pengarna till baka.");
-                //    Console.ReadKey();
-                //    EndTransaction();
-                //    Console.WriteLine("tryck Enter föratt avsluta.");
-                //    Console.ReadKey();
-                //}
-                check = false;
-
-            }
-            return check;
-        }
-
-        public void ReturnLeftMoney(int money)
-        {
-
-            string s = money.ToString();
+            Dictionary<int, int> returnManey = new Dictionary<int, int>();
+            string s = Money.ToString();
             char[] positions = s.ToCharArray();
             int lenght = positions.Length;
             int bb = lenght;
@@ -374,14 +219,142 @@ namespace Vending_Machine
                     }
                 }
             }
+            return returnManey;
+        }
+
+        public void InsertMoney(int money1)
+        {
+            Money += money1;
+        }
+
+        public void Purchase(int choice, bool haveMoney )
+        {
+            int b = choice - 4;
+            if (haveMoney == true)
+            {
+                for (int i = 0; i < Products.Count; i++)
+                {
+                    if (i ==b )
+                    {
+                        ByedList.Add(Products[i]);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("du har inte tillräckligt sakdo.");
+            }
+        }
+
+        public void ShowAll()
+        {
+            Console.Write($"\n1- För sätta mer Pengar.\n2- för att avsluta och få köpet.\n3- för att avbryta köpet. \n");
+            for (int i = 0; i < Products.Count; i++)
+            {
+                Console.WriteLine(i+4+"- " + Products[i].Name + "    Price: " + Products[i].Price + "Kr , Description: " + Products[i].Description);
+            }
+        }
+
+        public void CreateProducts()
+        {
+
+            Dricka dricka = new Dricka(15 , "Fanta" , "Drick upp den !");
+            Chips chips = new Chips(23 , "Chips" , "Öppna paketet och ät bara!");
+            Sandwich sandwich = new Sandwich(25,"Chicken" , "ät den i lung o ro MED SÅS !");
+            Products.Add(sandwich);
+            Products.Add(chips);
+            Products.Add(dricka);
+        }
 
 
+        //------------------------------------------------------------------- --------
+        public void ShowBuyedList()
+        {
+            Console.WriteLine("Din köpte lista : ");
+            for (int i = 0; i < ByedList.Count; i++)
+            {
+                Console.WriteLine("[ " +i + 1 + "- " + ByedList[i].Name + "    Price: " + ByedList[i].Price + "Kr , Description: " + ByedList[i].Description+" ]");
+            }
+        }
 
+        public void Cancel()
+        {
+            ReturnLeftMoney(EndTransaction());
+        }
+
+        public void GetMoney()
+        {
+            Console.WriteLine($"\t\t\t\t\t\t\t Din Saldo är : {Money} Kr");
+            Console.WriteLine($"\t\t\t\t\t\t\t Köpt Saldo är : {Totalprice()} Kr");
+        }
+
+        public void SetMoney()
+        {
+            Console.WriteLine("Hej här kan du sätta pengar : ");
+            Money = Get_Int();
+        }
+
+        public int Totalprice()
+        {
+            int c = 0;
+            foreach (Product product in ByedList)
+            {
+                c += product.Price;
+            }
+            return c;
+        }
+
+        public void SetMorMoney()
+        {
+            int c = Totalprice();
+            Console.WriteLine("Hej, här kan du sätta pengar i din saldo : ");
+            Console.Write("\n------------------------\n" +
+                              "\nDin saldo           : " + Money +
+                              "\nTotalt inköpt belopp: " + c +
+                              "\nTillgängligt saldo  : " + (Money - c) +
+
+                              "\n\nTilllägg pengar");
+            Money += Get_Int();
+        }
+
+        public bool CheckMoney()
+        {
+            bool check = true;
+            int totalPrice = 0;
+            foreach (Product product in ByedList)
+            {
+                totalPrice += product.Price;
+            }
+
+            if (totalPrice > Money)
+            {
+                //Console.WriteLine("Du har inte tillräckligt pengar vill du sätta pengar ? 1 ja // 2 nej avsluta.");
+                //int i = Get_Int();
+                //if (i == 1)
+                //{
+                //    SetMorMoney();
+                //}
+                //else
+                //{
+                //    Console.WriteLine("tryck Enter föratt få dina pengarna till baka.");
+                //    Console.ReadKey();
+                //    EndTransaction();
+                //    Console.WriteLine("tryck Enter föratt avsluta.");
+                //    Console.ReadKey();
+                //}
+                check = false;
+
+            }
+            return check;
+        }
+
+        public void ReturnLeftMoney(Dictionary<int,int> mony)
+        {
             Console.Write("Return Money ==> [ ");
-            foreach (KeyValuePair<int, int> item in returnManey)
+            foreach (KeyValuePair<int, int> item in mony)
             {
                 Console.Write(item.Value);
-                if (item.Key + 1 < returnManey.Count) { Console.Write(", "); }
+                if (item.Key + 1 < mony.Count) { Console.Write(", "); }
             }
             Console.WriteLine(" ]\n\n\n\n");
         }

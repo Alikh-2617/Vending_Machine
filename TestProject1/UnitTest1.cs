@@ -57,17 +57,32 @@ namespace TestProject1
         [Fact]
         public void CheckMoneyTest()
         {
-            vendingMachine.Money = 100;
+            vendingMachine.Money = 10;
             vendingMachine.ByedList.Add(Chips);
             vendingMachine.ByedList.Add(Chips);
 
-            Assert.True(vendingMachine.CheckMoney());
+            Assert.False(vendingMachine.CheckMoney());
             
-            // vendingMachine.Money = 10;
-            // Assert.False(vendingMachine.CheckMoney());
+            // vendingMachine.Money = 100;
+            // Assert.True(vendingMachine.CheckMoney());
         }
+        [Fact]
+        public void InsertMoneyTest()
+        {
+            vendingMachine.Money = 50;
+            vendingMachine.InsertMoney(100);
+            Assert.Equal(150,vendingMachine.Money);
+        }
+        [Fact]
+        public void EndTransactionTest()
+        {
+            vendingMachine.Money = 150;
+            Dictionary<int,int> ReturnMoney = vendingMachine.EndTransaction();
 
+            Assert.Equal(100, ReturnMoney[0]);
+            Assert.Equal(50 , ReturnMoney[1]);
 
+        }
 
 
     }
