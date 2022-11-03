@@ -15,15 +15,15 @@ namespace Vending_Machine
 
         public List<Product> Products = new List<Product>();
         public List<Product> ByedList = new List<Product>();
-
-
-        readonly int[] list = new int[] { 1, 5, 10, 20, 50, 100, 200, 500, 1000 };
-        string[] myList = new string[] { "", "", "0", "00", "000", "0000" };
         public int Money = 0;
+        readonly int[] list = new int[] { 1, 5, 10, 20, 50, 100, 200, 500, 1000 };
+
+
 
         public Dictionary<int ,int > EndTransaction()
         {
             Dictionary<int, int> returnManey = new Dictionary<int, int>();
+            string[] myList = new string[] { "", "", "0", "00", "000", "0000" };
             string s = Money.ToString();
             char[] positions = s.ToCharArray();
             int lenght = positions.Length;
@@ -251,7 +251,7 @@ namespace Vending_Machine
             Console.Write($"\n1- För sätta mer Pengar.\n2- för att avsluta och få köpet.\n3- för att avbryta köpet. \n");
             for (int i = 0; i < Products.Count; i++)
             {
-                Console.WriteLine(i+4+"- " + Products[i].Name + "    Price: " + Products[i].Price + "Kr , Description: " + Products[i].Description);
+                Console.WriteLine(i+4+"- " + Products[i].Name + "    Price: " + Products[i].Price + "Kr");
             }
         }
 
@@ -273,7 +273,7 @@ namespace Vending_Machine
             Console.WriteLine("Din köpte lista : ");
             for (int i = 0; i < ByedList.Count; i++)
             {
-                Console.WriteLine("[ " +i + 1 + "- " + ByedList[i].Name + "    Price: " + ByedList[i].Price + "Kr , Description: " + ByedList[i].Description+" ]");
+                Console.WriteLine("[ " +(i+1) + "- " + ByedList[i].Name + "    Price: " + ByedList[i].Price + "Kr , Description: " + ByedList[i].Description+" ]");
             }
         }
 

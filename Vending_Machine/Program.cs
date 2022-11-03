@@ -20,6 +20,7 @@ namespace Vending_Machine
                 switch (i)
                 {
                     case 1:
+                        Console.Write("sätta pengar  ");
                         machine.InsertMoney(machine.Get_Int());
                         break;
                     case 2:
